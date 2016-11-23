@@ -1,10 +1,7 @@
 class User < ActiveRecord::Base
   include BCrypt
 
-  # UPDATE ASSOCIATIONS!!!
   has_many :reviews
-  # has_many :items, through: :user_items
-  # has_many :user_items
 
   validates :username, presence: true
   validates :email, presence: true, uniqueness: true
