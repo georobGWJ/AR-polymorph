@@ -1,0 +1,17 @@
+#header-table {
+  width: 80%;
+  margin: auto;
+  border: 1px solid black;
+}
+
+#header-left {
+
+}
+
+#header-right {
+  align-items: right;
+}
+
+#header-buttons {
+  list-style-type: none;
+}

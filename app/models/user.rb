@@ -1,0 +1,39 @@
+class User < ActiveRecord::Base
+  include BCrypt
+
+  # UPDATE ASSOCIATIONS!!!
+  has_many :reviews
+  # has_many :items, through: :user_items
+  # has_many :user_items
+
+  validates :username, presence: true
+  validates :email, presence: true, uniqueness: true
+
+  def create
+    @user = User.new({username: params[:username],
+                     email: params[:email]})
+    @user.password = params[:password]
+    @user.save!
+  end
+
+   def password
+     @password ||= Password.new(password_hash)
+     @password
+   end
+
+   def password=(new_password)
+     @password = Password.create(new_password)
+     self.password_hash = @password
+   end
+
+	 def self.authenticate(email, password)
+     @user = User.find_by(email: email)
+
+     if @user && @user.password == password
+       return @user
+     else
+       return nil
+     end
+   end
+
+end
